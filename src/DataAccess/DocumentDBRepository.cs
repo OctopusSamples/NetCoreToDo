@@ -22,11 +22,11 @@ namespace OctopusSamples.CosmosDB.QuickStart.Web.DataAccess
 
     public class ToDoRepository<T> : IToDoRepository<T> where T : class
     {
-        private readonly DatabaseSettings _databaseSettings;
+        private readonly AppSettings _databaseSettings;
 
         private DocumentClient client;
 
-        public ToDoRepository(DatabaseSettings databaseSettings)
+        public ToDoRepository(AppSettings databaseSettings)
         {
             _databaseSettings = databaseSettings;
 

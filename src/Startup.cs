@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OctopusSamples.CosmosDB.QuickStart.Web.DataAccess;
 using OctopusSamples.CosmosDB.QuickStart.Web.Models;
@@ -10,7 +11,7 @@ namespace OctopusSamples.CosmosDB.QuickStart.Web
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IWebHostEnvironment env)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
@@ -27,15 +28,14 @@ namespace OctopusSamples.CosmosDB.QuickStart.Web
         {
             // Add framework services.
             services.AddControllersWithViews();
-            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
-            services.Configure<DatabaseSettings>(Configuration.GetSection("Database"));
+            services.Configure<AppSettings>(Configuration);
 
-            var dbSettings = Configuration.GetSection("Database").Get<DatabaseSettings>();
+            var dbSettings = Configuration.Get<AppSettings>();
             services.AddSingleton<IToDoRepository<Item>>(new ToDoRepository<Item>(dbSettings));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
