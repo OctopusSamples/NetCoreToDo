@@ -35,7 +35,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - A Simple .NET Core To-Do List | Version @Settings.Value.AppVersion running in @Settings.Value.EnvironmentName</p>
+            <p>&copy; @DateTime.Now.Year - A Simple .NET Core To-Do List | Version @Settings.Value.AppVersion running in @Settings.Value.DeploymentEnvironment</p>
         </footer>
     </div>
     <environment names="Development">
