@@ -13,5 +13,7 @@ namespace OctopusSamples.CosmosDB.QuickStart.Web.Models
         public string AccountKeys { get; set; }
         public string Database { get; set; }
         public string Collection { get; set; }
+        public string S3BucketPath { get; set; }
+        public string S3VersionBucketPath => $"{S3BucketPath}/{AppVersion}/{EnvironmentName}";
     }
 }
